@@ -14,6 +14,7 @@ class App extends Component {
   };
   
   deletePersonHandler = (personIndex) => {
+    
     // const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
@@ -21,8 +22,9 @@ class App extends Component {
   };
   
   changeNameHandler = (e, id) => {
+
     //finding the index of the changed element
-    const personIndex = this.state.person.findIndex(p => p.id === id);
+    const personIndex = this.state.persons.findIndex(p => p.id === id);
 
     //grabing and assigning the person to a new const
     const person = {...this.state.persons[personIndex]};
@@ -31,13 +33,13 @@ class App extends Component {
     person.name = e.target.value;
 
     //mutating the persons state
-    const persons = [...this.state.persons]
+    const persons = [...this.state.persons];
     
     //updating the new person into the persons
     persons[personIndex] = person;
 
     // therefore changing the state of the persons
-    this.setState({persons: persons})
+    this.setState({persons: persons});
 
   };
 
@@ -47,6 +49,16 @@ class App extends Component {
   };
 
   render () {
+
+    const style = {
+      backgroundColor: 'green',
+      color: 'white',
+      padding: '18px',
+      cursor: 'pointer',
+      font: 'inherit',
+      border: '1px solid blue',
+      transition: '0.2s'
+    };
 
     let persons = null;
 
@@ -66,6 +78,8 @@ class App extends Component {
             })}
           </div>
         );
+
+        style.backgroundColor = 'red';
       }
     };
 
@@ -73,7 +87,7 @@ class App extends Component {
 
     return (
       <div className = "App">
-        <button onClick = {this.togglePersonsHandler}>Change name</button>
+        <button style={style} onClick = {this.togglePersonsHandler}>Change name</button>
         {persons}
       </div>
       // React.createElement('div', {className: 'App'} ,'This is a React app')
